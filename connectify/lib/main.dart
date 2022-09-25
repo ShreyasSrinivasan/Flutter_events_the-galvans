@@ -1,3 +1,4 @@
+import 'package:connectify/routes.dart';
 import 'package:connectify/shared/loading.dart';
 import 'package:connectify/theme.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,8 @@ class _AppState extends State<App> {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
-          return const MaterialApp(
+          return MaterialApp(
+            routes: appRoutes,
             theme: appTheme,
           );
         }
