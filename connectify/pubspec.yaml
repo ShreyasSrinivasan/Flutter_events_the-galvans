@@ -53,6 +53,7 @@ flutter:
   assets:
     - assets/connectify-logo.svg
     - assets/design.svg
+    - assets/design-2.svg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -15,17 +15,13 @@ class RegisterScreen extends StatelessWidget {
       backgroundColor: Theme.of(context).primaryColorDark,
       body: Stack(children: [
         Positioned(
-          top: -330,
+          top: -290,
           left: 10,
-          child: Transform(
-            alignment: FractionalOffset.center,
-            transform: Matrix4.rotationZ(-math.pi / 2),
-            child: SvgPicture.asset(
-              'assets/design.svg',
-              height: 800,
-              fit: BoxFit.scaleDown,
-              color: Theme.of(context).primaryColorLight,
-            ),
+          child: SvgPicture.asset(
+            'assets/design-2.svg',
+            height: 800,
+            fit: BoxFit.scaleDown,
+            color: Theme.of(context).primaryColorLight,
           ),
         ),
         // SizedBox(height: 900),
