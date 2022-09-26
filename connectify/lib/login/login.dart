@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,7 +19,7 @@ class LoginScreen extends StatelessWidget {
               'assets/design.svg',
               height: 800,
               fit: BoxFit.scaleDown,
-              color: Theme.of(context).primaryColorLight,
+              color: Theme.of(context).primaryColorDark,
             ),
           ),
           Center(
@@ -27,7 +28,12 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 250),
-                  SvgPicture.asset('assets/connectify-logo.svg', height: 120),
+                  SvgPicture.asset(
+                    'assets/connectify-logo.svg',
+                    height: 120,
+                    fit: BoxFit.scaleDown,
+                    color: Theme.of(context).primaryColorDark,
+                  ),
                   Text('CONNECTIFY',
                       style: GoogleFonts.montserrat(
                           textStyle: const TextStyle(
@@ -91,15 +97,22 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Text('New User? '),
-                      Text(
-                        'Sign up!',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      )
-                    ],
+                  RichText(
+                    text: TextSpan(children: [
+                      TextSpan(
+                          text: 'New User? ',
+                          style: TextStyle(
+                              color: Theme.of(context).primaryColorDark)),
+                      TextSpan(
+                          text: 'Sign up!',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).primaryColorDark),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.pushNamed(context, '/register');
+                            })
+                    ]),
                   )
                 ],
               ),

@@ -1,4 +1,5 @@
 import 'package:connectify/routes.dart';
+import 'package:connectify/shared/error.dart';
 import 'package:connectify/shared/loading.dart';
 import 'package:connectify/theme.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class _AppState extends State<App> {
       builder: (context, snapshot) {
         // Check for errors
         if (snapshot.hasError) {
-          return const Text('error');
+          return const ErrorMessage();
         }
 
         // Once complete, show your application
