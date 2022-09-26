@@ -15,9 +15,10 @@ class LoginScreen extends StatelessWidget {
             top: -300,
             right: -65,
             child: SvgPicture.asset(
-              'assets/home-design.svg',
+              'assets/design.svg',
               height: 800,
               fit: BoxFit.scaleDown,
+              color: Theme.of(context).primaryColorLight,
             ),
           ),
           Center(
