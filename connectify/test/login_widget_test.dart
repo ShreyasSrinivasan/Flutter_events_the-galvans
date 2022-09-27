@@ -21,11 +21,10 @@ void main() {
     expect(find.text('qwerty'), findsOneWidget);
   });
 
-  testWidgets('Login widget have log in and signup buttons test',
+  testWidgets('Login widget have log in buttons test',
       (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: const LoginScreen()));
 
     expect(find.text('Log in'), findsOneWidget);
-    expect(find.text('Sign up!'), findsOneWidget);
   });
 }
