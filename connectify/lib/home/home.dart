@@ -3,10 +3,78 @@ import 'package:connectify/services/auth.dart';
 import 'package:connectify/shared/error.dart';
 import 'package:connectify/shared/loading.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:qrscan/qrscan.dart' as scanner;
+
+class QrScanner extends StatefulWidget {
+  const QrScanner({super.key});
+
+  @override
+  State<QrScanner> createState() => _QrScannerState();
+}
+
+class _QrScannerState extends State<QrScanner> {
+  String? result = '';
+  Future _scanQR() async {
+    var cameraStatus = await Permission.camera.status;
+    if (cameraStatus.isGranted) {
+      try {
+        String? cameraScanResult = await scanner.scan();
+        print(cameraScanResult);
+        setState(() {
+          result =
+              cameraScanResult; // setting string result with cameraScanResult
+        });
+      } on PlatformException catch (e) {
+        print(e);
+      }
+    } else {
+      var isGrant = await Permission.camera.request();
+
+      if (isGrant.isGranted) {
+        String? cameraScanResult = await scanner.scan();
+        print(cameraScanResult);
+        setState(() {
+          result =
+              cameraScanResult; // setting string result with cameraScanResult
+        });
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: () async {
+        await _scanQR();
+        Navigator.pushNamed(context, '/profile');
+      },
+      style: ButtonStyle(
+          backgroundColor:
+              MaterialStateProperty.all(Theme.of(context).primaryColorDark),
+          shape: MaterialStateProperty.all(
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)))),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+            horizontal: MediaQuery.of(context).size.width * 0.25 / 2,
+            vertical: 20),
+        child: Text(
+          'Scan QR Code',
+          style: GoogleFonts.montserrat(
+              textStyle: TextStyle(
+                  color: Theme.of(context).primaryColorLight,
+                  fontWeight: FontWeight.bold)),
+        ),
+      ),
+    );
+  }
+}
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -27,6 +95,16 @@ class HomeScreen extends StatelessWidget {
               backgroundColor: Theme.of(context).primaryColorDark,
               body: Stack(
                 children: [
+                  Positioned(
+                    bottom: -450,
+                    left: -10,
+                    child: SvgPicture.asset(
+                      'assets/design-2.svg',
+                      height: 800,
+                      fit: BoxFit.scaleDown,
+                      color: Theme.of(context).primaryColorLight,
+                    ),
+                  ),
                   Positioned(
                     top: 50,
                     left: 50,
@@ -68,41 +146,19 @@ class HomeScreen extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(75)),
 
                             //QR goes here
-                            child: Container(),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: MediaQuery.of(context).size.width *
-                                    0.25 /
-                                    2),
-                            child: Container(
-                              padding: const EdgeInsets.all(15),
-                              decoration: BoxDecoration(
-                                  color: Theme.of(context).primaryColorDark,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Center(
-                                  child: Text(
-                                'Scan QR Code',
-                                style: GoogleFonts.montserrat(
-                                    textStyle: TextStyle(
-                                        color:
-                                            Theme.of(context).primaryColorLight,
-                                        fontWeight: FontWeight.bold)),
-                              )),
+                            child: Padding(
+                              padding: const EdgeInsets.all(18.5),
+                              child: QrImage(
+                                data: "data123",
+                                size: MediaQuery.of(context).size.width * 0.35,
+                                backgroundColor:
+                                    Theme.of(context).primaryColorLight,
+                              ),
                             ),
                           ),
+                          const QrScanner()
                         ],
                       ),
-                    ),
-                  ),
-                  Positioned(
-                    bottom: -450,
-                    left: -10,
-                    child: SvgPicture.asset(
-                      'assets/design-2.svg',
-                      height: 800,
-                      fit: BoxFit.scaleDown,
-                      color: Theme.of(context).primaryColorLight,
                     ),
                   ),
                 ],

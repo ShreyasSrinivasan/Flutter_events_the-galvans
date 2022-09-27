@@ -7,15 +7,139 @@ import 'dart:math' as math;
 
 import 'package:google_fonts/google_fonts.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class RegisterForm extends StatefulWidget {
+  const RegisterForm({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<RegisterForm> createState() => _RegisterFormState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterFormState extends State<RegisterForm> {
   String email = '', password = '', name = '', profileURL = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(20.0)),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        name = value.trim();
+                      });
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Name',
+                      border: InputBorder.none,
+                      hintText: 'John Smith',
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(20.0)),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: TextField(
+                    keyboardType: TextInputType.emailAddress,
+                    onChanged: (value) {
+                      setState(() {
+                        email = value.trim();
+                      });
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Email',
+                      border: InputBorder.none,
+                      hintText: 'jiaramartins@gmail.com',
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(20.0)),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: TextField(
+                    onChanged: (value) {
+                      setState(() {
+                        profileURL = value.trim();
+                      });
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'LinkedIn profile URL',
+                      border: InputBorder.none,
+                      hintText: '/in/hello-world',
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                decoration: BoxDecoration(
+                    color: Colors.grey[300],
+                    borderRadius: BorderRadius.circular(20.0)),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: TextField(
+                    obscureText: true,
+                    onChanged: (value) {
+                      setState(() {
+                        password = value.trim();
+                      });
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Create a password',
+                      border: InputBorder.none,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 20),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 50),
+          child: ElevatedButton(
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(
+                    Theme.of(context).primaryColorDark),
+                shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20)))),
+            child: const Padding(
+              padding: EdgeInsets.fromLTRB(105, 20, 105, 20),
+              child: Text('Sign up'),
+            ),
+            onPressed: () async {
+              await AuthServices().createUserWithEmailPassword(email, password);
+              Navigator.pushNamed(context, '/');
+              // showAlertDialog(context);
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class RegisterScreen extends StatelessWidget {
+  const RegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -72,119 +196,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              borderRadius: BorderRadius.circular(20.0)),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: TextField(
-                              onChanged: (value) {
-                                setState(() {
-                                  name = value.trim();
-                                });
-                              },
-                              decoration: const InputDecoration(
-                                labelText: 'Name',
-                                border: InputBorder.none,
-                                hintText: 'John Smith',
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              borderRadius: BorderRadius.circular(20.0)),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: TextField(
-                              keyboardType: TextInputType.emailAddress,
-                              onChanged: (value) {
-                                setState(() {
-                                  email = value.trim();
-                                });
-                              },
-                              decoration: const InputDecoration(
-                                labelText: 'Email',
-                                border: InputBorder.none,
-                                hintText: 'jiaramartins@gmail.com',
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              borderRadius: BorderRadius.circular(20.0)),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: TextField(
-                              onChanged: (value) {
-                                setState(() {
-                                  profileURL = value.trim();
-                                });
-                              },
-                              decoration: const InputDecoration(
-                                labelText: 'LinkedIn profile URL',
-                                border: InputBorder.none,
-                                hintText: 'jiaramartins@gmail.com',
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              borderRadius: BorderRadius.circular(20.0)),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: TextField(
-                              obscureText: true,
-                              onChanged: (value) {
-                                setState(() {
-                                  password = value.trim();
-                                });
-                              },
-                              decoration: const InputDecoration(
-                                labelText: 'Create a password',
-                                border: InputBorder.none,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 50),
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              Theme.of(context).primaryColorDark),
-                          shape: MaterialStateProperty.all(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20)))),
-                      child: const Padding(
-                        padding: EdgeInsets.fromLTRB(105, 20, 105, 20),
-                        child: Text('Sign up'),
-                      ),
-                      onPressed: () {
-                        AuthServices()
-                            .createUserWithEmailPassword(email, password);
-                        Navigator.pushNamed(context, '/');
-                      },
-                    ),
-                  ),
+                  const RegisterForm()
                 ],
               ),
             ),
@@ -193,4 +205,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
+}
+
+showAlertDialog(BuildContext context) {
+  // set up the button
+  Widget okButton = TextButton(
+    child: const Text("OK"),
+    onPressed: () {
+      Navigator.of(context).pop();
+      Navigator.pushNamed(context, '/');
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: const Text(
+      "Successful",
+      style: TextStyle(color: Colors.green),
+    ),
+    content: const Text("Sent the request!"),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
