@@ -1,0 +1,16 @@
+# This is a generated file; do not edit or check into version control.
+firebase_auth=/Users/shreyassrinivasan/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-3.10.0/
+firebase_auth_web=/Users/shreyassrinivasan/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth_web-4.5.0/
+firebase_core=/Users/shreyassrinivasan/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-1.23.0/
+firebase_core_web=/Users/shreyassrinivasan/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core_web-1.7.2/
+path_provider=/Users/shreyassrinivasan/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.11/
+path_provider_android=/Users/shreyassrinivasan/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_android-2.0.20/
+path_provider_ios=/Users/shreyassrinivasan/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_ios-2.0.11/
+path_provider_linux=/Users/shreyassrinivasan/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-2.1.7/
+path_provider_macos=/Users/shreyassrinivasan/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-2.0.6/
+path_provider_windows=/Users/shreyassrinivasan/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-2.1.3/
+permission_handler=/Users/shreyassrinivasan/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler-10.0.1/
+permission_handler_android=/Users/shreyassrinivasan/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_android-10.0.0/
+permission_handler_apple=/Users/shreyassrinivasan/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_apple-9.0.4/
+permission_handler_windows=/Users/shreyassrinivasan/flutter/.pub-cache/hosted/pub.dartlang.org/permission_handler_windows-0.1.0/
+qrscan=/Users/shreyassrinivasan/flutter/.pub-cache/hosted/pub.dartlang.org/qrscan-0.3.3/
