@@ -28,6 +28,22 @@ class HomeScreen extends StatelessWidget {
               body: Stack(
                 children: [
                   Positioned(
+                    top: 50,
+                    left: 50,
+                    child: GestureDetector(
+                      onTap: () {
+                        AuthServices().singout();
+                        // Navigator.pushNamed(context, r)
+                      },
+                      child: SvgPicture.asset(
+                        'assets/exit.svg',
+                        height: 50,
+                        fit: BoxFit.scaleDown,
+                        color: Theme.of(context).primaryColorLight,
+                      ),
+                    ),
+                  ),
+                  Positioned(
                     top: 0,
                     left: 0,
                     child: Container(
